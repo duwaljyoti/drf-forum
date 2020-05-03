@@ -11,6 +11,7 @@ class Post(models.Model):
 
 class Reply(models.Model):
     comment = models.TextField()
-    user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-    is_best = models.BooleanField
+    user = models.ForeignKey(User, related_name='replies', on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, related_name='replies', on_delete=models.CASCADE)
+    is_best = models.BooleanField()
 

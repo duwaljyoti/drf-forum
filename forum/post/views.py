@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
-    queryset = Post.objects.all()
+    queryset = Post.objects.all().order_by('-id')
 
 
 class UserViewSet(viewsets.ModelViewSet):
