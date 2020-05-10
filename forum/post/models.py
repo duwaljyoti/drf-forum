@@ -11,7 +11,7 @@ class Post(models.Model):
     title = models.CharField(max_length=300)
     description = models.CharField(max_length=300)
     view_counter = models.CharField(max_length=300)
-    categories = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Category, related_name='posts')
 
     # def __str__(self):
     #     return self.product.name

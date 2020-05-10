@@ -17,12 +17,18 @@ class ReplySerializer(serializers.ModelSerializer):
         fields = ('comment', 'user_id', 'user')
 
 
+class PostsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('id', 'title', 'description')
+
+
 class CategorySerializer(serializers.ModelSerializer):
-    # posts = serializers.PrimaryKeyRelatedField(queryset=Post.objects.all(), many=True)
+    posts = PostsSerializer(many=True)
 
     class Meta:
         model = Category
-        fields = ('id', 'title')
+        fields = ('id', 'title', 'posts')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -34,8 +40,3 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = ('id', 'title', 'description', 'user', 'replies', 'categories')
         ordering = ['id']
-        # fields = '__all__'
-
-    def __str__(self):
-        return self.title
-
