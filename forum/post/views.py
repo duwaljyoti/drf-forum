@@ -3,11 +3,18 @@ from .serializers import PostSerializer, UserSerializer, CategorySerializer
 from .models import Post, Category
 from django.contrib.auth.models import User
 from rest_framework.response import Response
+from django.db.models import Q
 
 
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
-    queryset = Post.objects.all().order_by('-id')
+
+    def get_queryset(self):
+        queryset = Post.objects.order_by('id')
+        title = self.request.query_params.get('title', None)
+        if title is not None:
+            queryset = queryset.filter(Q(title__contains=title))
+        return queryset
 
 
 class UserViewSet(viewsets.ModelViewSet):
