@@ -10,7 +10,7 @@ class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
 
     def get_queryset(self):
-        queryset = Post.objects.order_by('id')
+        queryset = Post.objects.order_by('replies')
         title = self.request.query_params.get('title', None)
         if title is not None:
             queryset = queryset.filter(Q(title__contains=title))
