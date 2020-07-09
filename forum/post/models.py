@@ -13,8 +13,8 @@ class Post(models.Model):
     view_counter = models.CharField(max_length=300)
     categories = models.ManyToManyField(Category, related_name='posts')
 
-    # def __str__(self):
-    #     return self.product.name
+    def __str__(self):
+        return self.title
 
 
 class Reply(models.Model):

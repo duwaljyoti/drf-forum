@@ -35,6 +35,7 @@ class PostSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.first_name')
     categories = CategorySerializer(many=True, read_only=True)
     replies = ReplySerializer(many=True)
+
     # count_replies = serializers.SerializerMethodField()
 
     def get_count_replies(self, post_object):
@@ -42,9 +43,13 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('id',
-                  'title', 'description',
-                  'user', 'categories', 'replies',
-                  # 'count_replies'
-                  )
+        fields = (
+            'id',
+            'title',
+            # 'description',
+            'user',
+            'categories',
+            'replies',
+            # 'count_replies'
+        )
         # ordering = ['count_replies', 'asc']
